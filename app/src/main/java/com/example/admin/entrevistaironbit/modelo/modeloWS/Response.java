@@ -1,5 +1,5 @@
 
-package com.example.admin.entrevistaironbit.modelo;
+package com.example.admin.entrevistaironbit.modelo.modeloWS;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;

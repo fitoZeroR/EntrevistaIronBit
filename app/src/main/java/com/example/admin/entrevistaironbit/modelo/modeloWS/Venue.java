@@ -1,11 +1,13 @@
 
-package com.example.admin.entrevistaironbit.modelo;
+package com.example.admin.entrevistaironbit.modelo.modeloWS;
+
+import android.support.annotation.NonNull;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Venue {
+public class Venue implements Comparable<Venue> {
 
     @SerializedName("id")
     @Expose
@@ -28,6 +30,8 @@ public class Venue {
     @SerializedName("venuePage")
     @Expose
     private VenuePage venuePage;
+    private double distancia;
+    private boolean favorito;
 
     public String getId() {
         return id;
@@ -85,4 +89,26 @@ public class Venue {
         this.venuePage = venuePage;
     }
 
+    public double getDistancia() {
+        return distancia;
+    }
+
+    public void setDistancia(double distancia) {
+        this.distancia = distancia;
+    }
+
+    public boolean isFavorito() {
+        return favorito;
+    }
+
+    public void setFavorito(boolean favorito) {
+        this.favorito = favorito;
+    }
+
+    @Override
+    public int compareTo(@NonNull Venue venue) {
+        Double distanciaThis = this.distancia;
+        Double distanciaAComparar = venue.getDistancia();
+        return distanciaThis.compareTo(distanciaAComparar);
+    }
 }

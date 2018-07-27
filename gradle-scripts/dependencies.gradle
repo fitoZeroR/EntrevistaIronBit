@@ -16,7 +16,8 @@ ext {
 
     playServicesVersion = '15.0.1'
     playServicesDependencies = [
-            maps: "com.google.android.gms:play-services-maps:${playServicesVersion}"
+            maps    : "com.google.android.gms:play-services-maps:${playServicesVersion}",
+            location: "com.google.android.gms:play-services-location:${playServicesVersion}"
     ]
 
     butterknifeVersion = '8.8.1'
@@ -34,7 +35,7 @@ ext {
 
     okhttp3Version = '3.10.0'
     okhttp3Dependencies = [
-            okhttp3 : "com.squareup.okhttp3:okhttp:${okhttp3Version}"
+            okhttp3: "com.squareup.okhttp3:okhttp:${okhttp3Version}"
     ]
 
     rxandroidVersion = '2.0.2'
@@ -42,18 +43,18 @@ ext {
     rxbindingVersion = '2.1.1'
     rxpermissionsVersion = '0.9.5@aar'
     reactiveDependencies = [
-            rxandroid     : "io.reactivex.rxjava2:rxandroid:${rxandroidVersion}",
-            rxjava        : "io.reactivex.rxjava2:rxjava:${rxjavaVersion}",
-            rxbinding     : "com.jakewharton.rxbinding2:rxbinding:${rxbindingVersion}",
-            rxpermissions : "com.tbruyelle.rxpermissions2:rxpermissions:${rxpermissionsVersion}"
+            rxandroid    : "io.reactivex.rxjava2:rxandroid:${rxandroidVersion}",
+            rxjava       : "io.reactivex.rxjava2:rxjava:${rxjavaVersion}",
+            rxbinding    : "com.jakewharton.rxbinding2:rxbinding:${rxbindingVersion}",
+            rxpermissions: "com.tbruyelle.rxpermissions2:rxpermissions:${rxpermissionsVersion}"
     ]
 
     javaxVersion = '1.0'
     dagger2Version = '2.16'
     dagger2Dependencies = [
-            dagger            : "com.google.dagger:dagger:${dagger2Version}",
-            daggerCompiler    : "com.google.dagger:dagger-compiler:${dagger2Version}",
-            daggerAnnotations : "javax.annotation:jsr250-api:${javaxVersion}"
+            dagger           : "com.google.dagger:dagger:${dagger2Version}",
+            daggerCompiler   : "com.google.dagger:dagger-compiler:${dagger2Version}",
+            daggerAnnotations: "javax.annotation:jsr250-api:${javaxVersion}"
     ]
 
     orhanobutVersion = '2.2.0'
@@ -64,6 +65,12 @@ ext {
     gsonVersion = '2.8.5'
     gsonDependencies = [
             gson: "com.google.code.gson:gson:${gsonVersion}"
+    ]
+
+    ormliteVersion = '5.1'
+    ormliteDependencies = [
+        ormliteCore   : "com.j256.ormlite:ormlite-core:${ormliteVersion}",
+        ormliteAndroid: "com.j256.ormlite:ormlite-android:${ormliteVersion}"
     ]
 
     junitVersion = '4.12'

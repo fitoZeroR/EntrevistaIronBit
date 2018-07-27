@@ -1,7 +1,7 @@
 package com.example.admin.entrevistaironbit.retrofit;
 
 
-import com.example.admin.entrevistaironbit.modelo.Lugar;
+import com.example.admin.entrevistaironbit.modelo.modeloWS.Lugar;
 import com.example.admin.entrevistaironbit.utilidades.Constantes;
 
 import io.reactivex.Observable;

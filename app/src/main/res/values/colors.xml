@@ -4,8 +4,10 @@
     <color name="colorPrimaryDark">#5A0001</color>
     <color name="colorAccent">#5A0001</color>
 
-    <color name="nav_item_state_list">#F1EFED</color>
-    <color name="color_bottom_navigation_view">#F1EFED</color>
+    <color name="primario">#5D3334</color>
 
+    <color name="color_bottom_navigation_view">#F1EFED</color>
+    <color name="gris">#BFBFC7</color>
     <color name="blanco">#FFFFFF</color>
+    <color name="negro">#000000</color>
 </resources>

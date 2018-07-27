@@ -8,13 +8,21 @@ import android.net.NetworkInfo;
 
 import com.example.admin.entrevistaironbit.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Objects;
+
+import static com.example.admin.entrevistaironbit.utilidades.Constantes.FORMATO;
+
 public class Tools {
-    public static void mensajeInformativo(Activity activity, String mensaje) {
+    public static void mensajeInformativo(Activity activity, String mensaje, boolean finalizar) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setMessage(mensaje);
         builder.setPositiveButton(activity.getString(R.string.action_accept), (dialog, which) -> {
             dialog.dismiss();
-            activity.finish();
+            if (finalizar) {
+                activity.finish();
+            }
         });
         builder.setCancelable(false);
         builder.create();
@@ -22,10 +30,10 @@ public class Tools {
     }
 
     public static boolean isConnectionNetwork(Activity activity) {
-        NetworkInfo netInfo = null;
+        NetworkInfo netInfo;
         ConnectivityManager cm = (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
         try {
-            netInfo = cm.getActiveNetworkInfo();
+            netInfo = Objects.requireNonNull(cm).getActiveNetworkInfo();
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -42,8 +50,11 @@ public class Tools {
         double va1 = Math.pow(sindLat, 2) + Math.pow(sindLng, 2)
                 * Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2));
         double va2 = 2 * Math.atan2(Math.sqrt(va1), Math.sqrt(1 - va1));
-        double distancia = radioTierra * va2;
 
-        return distancia;
+        return radioTierra * va2;
+    }
+
+    public static String parsearFechaCumpleanos() {
+        return new SimpleDateFormat(FORMATO).format(new Date());
     }
 }

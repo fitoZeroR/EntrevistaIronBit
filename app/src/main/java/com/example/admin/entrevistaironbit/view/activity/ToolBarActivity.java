@@ -1,4 +1,4 @@
-package com.example.admin.entrevistaironbit.view;
+package com.example.admin.entrevistaironbit.view.activity;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -16,9 +16,11 @@ import com.example.admin.entrevistaironbit.R;
 import com.example.admin.entrevistaironbit.di.HasComponent;
 import com.example.admin.entrevistaironbit.di.components.ClienteComponent;
 import com.example.admin.entrevistaironbit.di.components.DaggerClienteComponent;
-import com.example.admin.entrevistaironbit.di.modules.ActivityModule;
 import com.example.admin.entrevistaironbit.di.modules.ClienteModule;
+import com.example.admin.entrevistaironbit.modelo.modeloWS.Venue;
 import com.example.admin.entrevistaironbit.presenter.MainPresenter;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -27,7 +29,7 @@ import butterknife.ButterKnife;
 
 import static com.example.admin.entrevistaironbit.utilidades.Tools.mensajeInformativo;
 
-public abstract class ToolBarVC extends AppCompatActivity implements MainPresenter.View, HasComponent<ClienteComponent> {
+public abstract class ToolBarActivity extends AppCompatActivity implements MainPresenter.View, HasComponent<ClienteComponent> {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
@@ -87,7 +89,7 @@ public abstract class ToolBarVC extends AppCompatActivity implements MainPresent
     @Override
     public void showError(String mensaje) {
         String mensajeAlerta = mensaje == null ? getString(R.string.error) : mensaje;
-        mensajeInformativo(this, mensajeAlerta);
+        mensajeInformativo(this, mensajeAlerta, true);
     }
 
     @Override
@@ -99,7 +101,6 @@ public abstract class ToolBarVC extends AppCompatActivity implements MainPresent
 
     private void initializeDagger() {
         clienteComponent = DaggerClienteComponent.builder()
-                .activityModule(new ActivityModule(this))
                 .clienteModule(new ClienteModule())
                 .mainComponent(((Aplicacion) getApplication()).getMainComponent())
                 .build();
@@ -107,11 +108,14 @@ public abstract class ToolBarVC extends AppCompatActivity implements MainPresent
         getComponent().inject(this);
     }
 
-    public void addFragment(Fragment fragment) {
+    void addFragment(Fragment fragment) {
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.replace(R.id.frame_container, fragment, fragment.getClass().getSimpleName());
 
         transaction.commit();
     }
+
+    @Override
+    public void despliegaLugares(List<Venue> venueList) {}
 }

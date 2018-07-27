@@ -1,20 +1,23 @@
 package com.example.admin.entrevistaironbit.presenter;
 
 import com.example.admin.entrevistaironbit.interactor.MainInteractor;
-import com.example.admin.entrevistaironbit.modelo.Lugar;
+import com.example.admin.entrevistaironbit.modelo.modeloWS.Venue;
 import com.google.gson.Gson;
 import com.orhanobut.logger.Logger;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
 import io.reactivex.disposables.Disposable;
 
-public class MainPresenter extends Presenter<MainPresenter.View> {
-    private MainInteractor mainInteractor;
+public class MainPresenter extends Presenter<MainPresenter.View> implements MainInteractor.MainInteractorListener {
+    private final MainInteractor mainInteractor;
 
     @Inject
     public MainPresenter(MainInteractor mainInteractor) {
         this.mainInteractor = mainInteractor;
+        this.mainInteractor.setMainInteractorListener(this);
     }
 
     @Override
@@ -23,15 +26,15 @@ public class MainPresenter extends Presenter<MainPresenter.View> {
         setView(null);
     }
 
-    public void disparaServicioLugares() {
+    public void disparaServicioLugares(String latLong, String fecha) {
         getView().showLoading();
-        Disposable disposable = mainInteractor.consultaListaLugares().subscribe(lugar -> {
+        Disposable disposable = mainInteractor.consultaListaLugares(latLong, fecha).subscribe(lugar -> {
             if (lugar == null) {
                 getView().showError(null);
             } else {
                 Logger.json(new Gson().toJson(lugar));
-                getView().hideLoading();
-                getView().despliegaLugares(lugar);
+
+                mainInteractor.ordenaRegistros(lugar.getResponse().getVenues(), latLong);
             }
         }, throwable -> {
             getView().hideLoading();
@@ -41,10 +44,16 @@ public class MainPresenter extends Presenter<MainPresenter.View> {
         addDisposableObserver(disposable);
     }
 
+    @Override
+    public void onOrderRegistros(List<Venue> venueList) {
+        getView().hideLoading();
+        getView().despliegaLugares(venueList);
+    }
+
     public interface View extends Presenter.View {
         void showLoading();
         void hideLoading();
         void showError(String mensaje);
-        void despliegaLugares(Lugar registroList);
+        void despliegaLugares(List<Venue> venueList);
     }
 }

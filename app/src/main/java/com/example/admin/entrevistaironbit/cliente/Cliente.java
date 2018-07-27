@@ -1,6 +1,6 @@
 package com.example.admin.entrevistaironbit.cliente;
 
-import com.example.admin.entrevistaironbit.modelo.Lugar;
+import com.example.admin.entrevistaironbit.modelo.modeloWS.Lugar;
 import com.example.admin.entrevistaironbit.retrofit.RetrofitCliente;
 
 import io.reactivex.Observable;
@@ -12,8 +12,8 @@ import static com.example.admin.entrevistaironbit.utilidades.Constantes.*;
 
 public class Cliente extends RetrofitCliente implements Servicio {
     @Override
-    public Observable<Lugar> consultaLugares() {
-        return getConsumoService().obtieneLugares(FECHA, LOCALIDAD, CLIENT_ID, CLIENT_SECRET, LL)
+    public Observable<Lugar> consultaLugares(String latLong, String fecha) {
+        return getConsumoService().obtieneLugares(fecha, LOCALIDAD, CLIENT_ID, CLIENT_SECRET, latLong)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

@@ -7,11 +7,11 @@ import io.reactivex.disposables.Disposable;
 
 abstract class Presenter<T extends Presenter.View> {
 
-  private CompositeDisposable compositeDisposable = new CompositeDisposable();
+  private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
   private T view;
 
-  public T getView() {
+  T getView() {
     return view;
   }
 
@@ -19,11 +19,7 @@ abstract class Presenter<T extends Presenter.View> {
     this.view = view;
   }
 
-  public void initialize() {
-
-  }
-
-  public void terminate() {
+  void terminate() {
     dispose();
   }
 
@@ -37,7 +33,7 @@ abstract class Presenter<T extends Presenter.View> {
     }
   }
 
-  public interface View {
+  protected interface View {
 
     Context context();
   }

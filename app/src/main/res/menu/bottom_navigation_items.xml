@@ -2,8 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/menu_principal_item"
+        android:icon="@drawable/ic_place"
         android:title="@string/txt_pincipal"/>
     <item
         android:id="@+id/menu_favoritos_item"
+        android:icon="@drawable/ic_star_border"
         android:title="@string/txt_favoritos"/>
 </menu>

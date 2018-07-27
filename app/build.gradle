@@ -35,9 +35,10 @@ dependencies {
     implementation constraintDependencies.constraintLayout
     // Play Services
     implementation playServicesDependencies.maps
+    implementation playServicesDependencies.location
     // dagger 2
     implementation dagger2Dependencies.dagger
-    implementation 'com.android.support:support-v4:28.0.0-alpha3'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     annotationProcessor dagger2Dependencies.daggerCompiler
     compileOnly dagger2Dependencies.daggerAnnotations
     // ButterKnife
@@ -55,12 +56,15 @@ dependencies {
     implementation reactiveDependencies.rxandroid
     // RxBinding
     implementation reactiveDependencies.rxbinding
-    // rxpermissions
+    // RxPermissions
     implementation reactiveDependencies.rxpermissions
     // Logger
     implementation orhanobutDependencies.orhanobut
     // Gson
     implementation gsonDependencies.gson
+    // ORMLITE
+    implementation ormliteDependencies.ormliteCore
+    implementation ormliteDependencies.ormliteAndroid
     // testing
     testImplementation testingDependencies.junit
     androidTestImplementation testingDependencies.runner
