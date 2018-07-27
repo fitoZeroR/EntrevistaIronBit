@@ -10,7 +10,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 
 import com.example.admin.entrevistaironbit.R;
 import com.example.admin.entrevistaironbit.modelo.modeloWS.Venue;
@@ -27,7 +26,6 @@ import java.util.Objects;
 import butterknife.BindView;
 
 import static android.location.LocationManager.GPS_PROVIDER;
-import static com.example.admin.entrevistaironbit.utilidades.Constantes.*;
 import static com.example.admin.entrevistaironbit.utilidades.Tools.*;
 
 public class MainActivity extends ToolBarActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
@@ -38,6 +36,7 @@ public class MainActivity extends ToolBarActivity implements GoogleApiClient.Con
     private LugaresFragment lugaresFragment;
 
     private GoogleApiClient mGoogleApiClient;
+    private Location mLastLocation;
 
     private static boolean banderaInicioServicio;
 
@@ -99,9 +98,7 @@ public class MainActivity extends ToolBarActivity implements GoogleApiClient.Con
                     if (granted) {
                         // The permission has been granted//
                         if (isConnectionNetwork(this)) {
-                            Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-                            Log.e(TAG, String.valueOf(mLastLocation.getLatitude()));
-                            Log.e(TAG, String.valueOf(mLastLocation.getLongitude()));
+                            mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
                             mainPresenter.disparaServicioLugares(mLastLocation.getLatitude()+","+mLastLocation.getLongitude(), parsearFechaCumpleanos());
                         } else {
                             mensajeInformativo(this, getString(R.string.msg_no_conexion_internet), true);
@@ -117,7 +114,7 @@ public class MainActivity extends ToolBarActivity implements GoogleApiClient.Con
     public void despliegaLugares(List<Venue> venueList) {
         banderaInicioServicio = true;
         createMenuBottomNavigationView();
-        addFragment(lugaresFragment = LugaresFragment.initInstance(venueList));
+        addFragment(lugaresFragment = LugaresFragment.initInstance(venueList, mLastLocation.getLatitude()+","+mLastLocation.getLongitude()));
     }
 
     @Override
