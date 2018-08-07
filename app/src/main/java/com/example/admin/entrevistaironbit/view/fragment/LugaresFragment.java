@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.admin.entrevistaironbit.R;
-import com.example.admin.entrevistaironbit.di.components.ClienteComponent;
 import com.example.admin.entrevistaironbit.modelo.modeloWS.Venue;
 import com.example.admin.entrevistaironbit.presenter.LugaresPresenter;
 import com.example.admin.entrevistaironbit.view.activity.DetalleActivity;
@@ -55,7 +54,7 @@ public class LugaresFragment extends BaseFragment implements LugaresPresenter.Vi
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.getComponent(ClienteComponent.class).inject(this);
+        getComponent().inject(this);
         lugaresPresenter.setView(this);
     }
 
@@ -64,7 +63,7 @@ public class LugaresFragment extends BaseFragment implements LugaresPresenter.Vi
         View view = inflater.inflate(R.layout.fragment_principal, container, false);
         ButterKnife.bind(this, view);
 
-        lugaresPresenter.recuperaFavoritosGPS(venueList, context());
+        lugaresPresenter.recuperaFavoritosGPS(venueList);
 
         return view;
     }
@@ -101,11 +100,11 @@ public class LugaresFragment extends BaseFragment implements LugaresPresenter.Vi
 
     @Override
     public void creaFavorito(Venue venue) {
-        lugaresPresenter.insertaFavoritoDB(venue, context());
+        lugaresPresenter.insertaFavoritoDB(venue);
     }
 
     @Override
     public void eliminaFavorito(Venue venue) {
-        lugaresPresenter.borraFavoritoDB(venue, context());
+        lugaresPresenter.borraFavoritoDB(venue);
     }
 }

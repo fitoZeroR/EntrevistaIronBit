@@ -1,8 +1,6 @@
 package com.example.admin.entrevistaironbit.interactor;
 
-import android.content.Context;
-
-import com.example.admin.entrevistaironbit.db.dao.DAOFavorito;
+import com.example.admin.entrevistaironbit.db.dao.ICrud;
 import com.example.admin.entrevistaironbit.modelo.modeloDB.Favorito;
 import com.example.admin.entrevistaironbit.modelo.modeloWS.Venue;
 import com.google.gson.Gson;
@@ -13,18 +11,21 @@ import java.util.List;
 import javax.inject.Inject;
 
 public class LugaresInteractor {
+    private final ICrud iCrud;
     private LugaresInteractorListener lugaresInteractorListener;
 
     @Inject
-    public LugaresInteractor() {}
+    public LugaresInteractor(ICrud iCrud) {
+        this.iCrud = iCrud;
+    }
 
     public void setLugaresInteractorListener(LugaresInteractorListener lugaresInteractorListener) {
         this.lugaresInteractorListener = lugaresInteractorListener;
     }
 
     @SuppressWarnings("unchecked")
-    public void recuperaFavoritosGPS(List<Venue> venueList, Context context) {
-        List<Favorito> listFavoritos = (List<Favorito>) new DAOFavorito(context).findAll();
+    public void recuperaFavoritosGPS(List<Venue> venueList) {
+        List<Favorito> listFavoritos = (List<Favorito>) iCrud.findAll();
         if (listFavoritos.size() != 0) {
             List<Venue> listVenue = new ArrayList<>();
             for (int x = 0; x < listFavoritos.size(); x++) {
@@ -39,14 +40,14 @@ public class LugaresInteractor {
         lugaresInteractorListener.retornaFavoritosGPS(venueList);
     }
 
-    public void creaFavoritoDB(Venue venue, Context context) {
+    public void creaFavoritoDB(Venue venue) {
         venue.setFavorito(true);
-        new DAOFavorito(context).create(new Favorito(venue.getId(), new Gson().toJson(venue, Venue.class)));
+        iCrud.create(new Favorito(venue.getId(), new Gson().toJson(venue, Venue.class)));
     }
 
-    public void eliminaFavoritoDB(Venue venue, Context context) {
+    public void eliminaFavoritoDB(Venue venue) {
         venue.setFavorito(false);
-        new DAOFavorito(context).delete(venue.getId());
+        iCrud.delete(venue.getId());
     }
 
     public interface LugaresInteractorListener {

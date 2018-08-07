@@ -1,7 +1,5 @@
 package com.example.admin.entrevistaironbit.presenter;
 
-import android.content.Context;
-
 import com.example.admin.entrevistaironbit.interactor.FavoritosInteractor;
 import com.example.admin.entrevistaironbit.modelo.modeloWS.Venue;
 
@@ -24,8 +22,8 @@ public class FavoritosPresenter extends Presenter<FavoritosPresenter.View> imple
         setView(null);
     }
 
-    public void recuperaFavoritosAll(Context context) {
-        favoritosInteractor.recuperaFavoritosALL(context);
+    public void recuperaFavoritosAll() {
+        favoritosInteractor.recuperaFavoritosALL();
     }
 
     @Override
