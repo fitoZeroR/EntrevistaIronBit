@@ -1,7 +1,5 @@
 package com.example.admin.entrevistaironbit.presenter;
 
-import android.content.Context;
-
 import com.example.admin.entrevistaironbit.interactor.LugaresInteractor;
 import com.example.admin.entrevistaironbit.modelo.modeloWS.Venue;
 
@@ -24,15 +22,16 @@ public class LugaresPresenter extends Presenter<LugaresPresenter.View> implement
         setView(null);
     }
 
-    public void recuperaFavoritosGPS(List<Venue> venueList, Context context) {
-        lugaresInteractor.recuperaFavoritosGPS(venueList, context);
+    public void recuperaFavoritosGPS(List<Venue> venueList) {
+        lugaresInteractor.recuperaFavoritosGPS(venueList);
     }
 
-    public void insertaFavoritoDB(Venue venue, Context context) {
-        lugaresInteractor.creaFavoritoDB(venue, context);
+    public void insertaFavoritoDB(Venue venue) {
+        lugaresInteractor.creaFavoritoDB(venue);
     }
-    public void borraFavoritoDB(Venue venue, Context context) {
-        lugaresInteractor.eliminaFavoritoDB(venue, context);
+
+    public void borraFavoritoDB(Venue venue) {
+        lugaresInteractor.eliminaFavoritoDB(venue);
     }
 
     @Override

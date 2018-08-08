@@ -19,32 +19,26 @@ public class DAOFavorito implements ICrud {
     }
 
     @Override
-    public int create(Object item) {
-        int index = -1;
-
+    public void create(Object item) {
         Favorito favorito = (Favorito) item;
         try {
-            index = helper.getFavoritoDao().create(favorito);
+            helper.getFavoritoDao().create(favorito);
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return index;
     }
 
     @Override
-    public int delete(String idVenue) {
-        int index = -1;
-
+    public void delete(String idVenue) {
         try {
             DeleteBuilder<Favorito, Integer> deleteBuilder = helper.getFavoritoDao().deleteBuilder();
             deleteBuilder.where().eq("idVenue", idVenue);
-            index = deleteBuilder.delete();
+            deleteBuilder.delete();
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return index;
     }
 
     @Override

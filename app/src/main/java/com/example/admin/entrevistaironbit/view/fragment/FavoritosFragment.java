@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.admin.entrevistaironbit.R;
-import com.example.admin.entrevistaironbit.di.components.ClienteComponent;
 import com.example.admin.entrevistaironbit.modelo.modeloWS.Venue;
 import com.example.admin.entrevistaironbit.presenter.FavoritosPresenter;
 import com.example.admin.entrevistaironbit.view.adapter.CustomAdapterFavoritos;
@@ -45,7 +44,7 @@ public class FavoritosFragment extends BaseFragment implements FavoritosPresente
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.getComponent(ClienteComponent.class).inject(this);
+        getComponent().inject(this);
         favoritosPresenter.setView(this);
     }
 
@@ -54,7 +53,7 @@ public class FavoritosFragment extends BaseFragment implements FavoritosPresente
         View view = inflater.inflate(R.layout.fragment_principal, container, false);
         ButterKnife.bind(this, view);
 
-        favoritosPresenter.recuperaFavoritosAll(context());
+        favoritosPresenter.recuperaFavoritosAll();
 
         return view;
     }

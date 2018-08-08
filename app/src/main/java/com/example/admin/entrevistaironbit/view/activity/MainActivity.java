@@ -51,7 +51,6 @@ public class MainActivity extends ToolBarActivity implements GoogleApiClient.Con
                 .addConnectionCallbacks(this)
                 .addApi(LocationServices.API)
                 .build();
-
     }
 
     protected void onStart() {
