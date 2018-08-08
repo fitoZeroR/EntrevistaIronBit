@@ -12,4 +12,6 @@
     <string name="txt_aceptar_permisos">Debe aceptar los permisos.</string>
     <string name="txt_sin_informacion">Sin información disponible.</string>
     <string name="txt_detalle">Detalle</string>
+
+    <string name="txt_origen">Origen</string>
 </resources>

@@ -38,7 +38,6 @@ dependencies {
     implementation playServicesDependencies.location
     // dagger 2
     implementation dagger2Dependencies.dagger
-    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     annotationProcessor dagger2Dependencies.daggerCompiler
     compileOnly dagger2Dependencies.daggerAnnotations
     // ButterKnife

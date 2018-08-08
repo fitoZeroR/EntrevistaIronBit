@@ -26,6 +26,8 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.example.admin.entrevistaironbit.utilidades.Constantes.*;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -37,14 +39,17 @@ public class LugaresFragment extends BaseFragment implements LugaresPresenter.Vi
     @Inject
     public LugaresPresenter lugaresPresenter;
 
+    private final String gps;
+
     private final List<Venue> venueList;
 
-    private LugaresFragment(List<Venue> venueList) {
+    private LugaresFragment(List<Venue> venueList, String gps) {
         this.venueList = venueList;
+        this.gps = gps;
     }
 
-    public static LugaresFragment initInstance(List<Venue> venueList) {
-        return new LugaresFragment(venueList);
+    public static LugaresFragment initInstance(List<Venue> venueList, String gps) {
+        return new LugaresFragment(venueList, gps);
     }
 
     @Override
@@ -75,14 +80,14 @@ public class LugaresFragment extends BaseFragment implements LugaresPresenter.Vi
         CustomAdapterLugares customAdapterLugares = new CustomAdapterLugares(venueList, context(), this);
         customAdapterLugares.getViewClickedObservable()
                 .subscribe(itemView -> {
-                    /*Intent intentDetalle = new Intent(context(), DetalleActivity.class);
+                    Intent intentDetalle = new Intent(context(), DetalleActivity.class);
                     Bundle bundleDetalle = new Bundle();
-                    bundleDetalle.putDouble(BUNDLE_LATITUD, registroList.get(rcvRegistros.getChildAdapterPosition(itemView)).getGeometry().getLocation().getLat());
-                    bundleDetalle.putDouble(BUNDLE_LONGITUD, registroList.get(rcvRegistros.getChildAdapterPosition(itemView)).getGeometry().getLocation().getLng());
-                    bundleDetalle.putString(BUNDLE_NOMBRE, registroList.get(rcvRegistros.getChildAdapterPosition(itemView)).getName());
+                    bundleDetalle.putString(BUNDLE_GPS, gps);
+                    bundleDetalle.putDouble(BUNDLE_LATITUD, venueList.get(rcvPrincipal.getChildAdapterPosition(itemView)).getLocation().getLat());
+                    bundleDetalle.putDouble(BUNDLE_LONGITUD, venueList.get(rcvPrincipal.getChildAdapterPosition(itemView)).getLocation().getLng());
+                    bundleDetalle.putString(BUNDLE_NOMBRE, venueList.get(rcvPrincipal.getChildAdapterPosition(itemView)).getName() + ": " + (venueList.get(rcvPrincipal.getChildAdapterPosition(itemView)).getCategories().size() == 0 ? context().getString(R.string.txt_sin_informacion) : venueList.get(rcvPrincipal.getChildAdapterPosition(itemView)).getCategories().get(0).getName()));
                     intentDetalle.putExtras(bundleDetalle);
-                    startActivity(intentDetalle);*/
-                    startActivity(new Intent(context(), DetalleActivity.class));
+                    startActivity(intentDetalle);
                 });
         rcvPrincipal.setLayoutManager(new LinearLayoutManager(getActivity()));
         rcvPrincipal.setHasFixedSize(true);
