@@ -9,6 +9,6 @@ import dagger.Component;
 
 @PerActivity
 @Component(dependencies = MainComponent.class, modules = {ActivityModule.class, ClienteModule.class})
-public interface ClienteComponent {
+public interface ClienteComponent extends ActivityComponent {
     void inject(ToolBarActivity toolBarActivity);
 }

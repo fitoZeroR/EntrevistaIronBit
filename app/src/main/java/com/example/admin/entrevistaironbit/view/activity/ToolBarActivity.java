@@ -16,6 +16,7 @@ import com.example.admin.entrevistaironbit.R;
 import com.example.admin.entrevistaironbit.di.HasComponent;
 import com.example.admin.entrevistaironbit.di.components.ClienteComponent;
 import com.example.admin.entrevistaironbit.di.components.DaggerClienteComponent;
+import com.example.admin.entrevistaironbit.di.modules.ActivityModule;
 import com.example.admin.entrevistaironbit.di.modules.ClienteModule;
 import com.example.admin.entrevistaironbit.modelo.modeloWS.Venue;
 import com.example.admin.entrevistaironbit.presenter.MainPresenter;
@@ -101,8 +102,9 @@ public abstract class ToolBarActivity extends AppCompatActivity implements MainP
 
     private void initializeDagger() {
         clienteComponent = DaggerClienteComponent.builder()
-                .clienteModule(new ClienteModule())
                 .mainComponent(((Aplicacion) getApplication()).getMainComponent())
+                .activityModule(new ActivityModule(this))
+                //.clienteModule(new ClienteModule())
                 .build();
 
         getComponent().inject(this);
