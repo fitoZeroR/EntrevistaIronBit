@@ -39,7 +39,7 @@ ext {
     ]
 
     rxandroidVersion = '2.0.2'
-    rxjavaVersion = '2.1.14'
+    rxjavaVersion = '2.2.0'
     rxbindingVersion = '2.1.1'
     rxpermissionsVersion = '0.9.5@aar'
     reactiveDependencies = [
