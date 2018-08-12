@@ -17,7 +17,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".view.activity.MainActivity"
+            android:name=".presentation.view.activity.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme">
             <intent-filter>
@@ -27,8 +27,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".view.activity.DetalleActivity"
-            android:parentActivityName=".view.activity.MainActivity"
+        <activity android:name=".presentation.view.activity.DetalleActivity"
+            android:parentActivityName=".presentation.view.activity.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"/>
 

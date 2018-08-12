@@ -2,9 +2,9 @@ package com.example.admin.entrevistaironbit;
 
 import android.app.Application;
 
-import com.example.admin.entrevistaironbit.di.components.DaggerMainComponent;
-import com.example.admin.entrevistaironbit.di.components.MainComponent;
-import com.example.admin.entrevistaironbit.di.modules.MainModule;
+import com.example.admin.entrevistaironbit.presentation.di.components.DaggerMainComponent;
+import com.example.admin.entrevistaironbit.presentation.di.components.MainComponent;
+import com.example.admin.entrevistaironbit.presentation.di.modules.MainModule;
 import com.orhanobut.logger.LogAdapter;
 import com.orhanobut.logger.Logger;
 
