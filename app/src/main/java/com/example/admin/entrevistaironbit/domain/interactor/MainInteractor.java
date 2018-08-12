@@ -1,6 +1,6 @@
 package com.example.admin.entrevistaironbit.domain.interactor;
 
-import com.example.admin.entrevistaironbit.data.cliente.Servicio;
+import com.example.admin.entrevistaironbit.data.remote.cliente.ServicioWS;
 import com.example.admin.entrevistaironbit.domain.modelo.modeloWS.Lugar;
 import com.example.admin.entrevistaironbit.domain.modelo.modeloWS.Venue;
 
@@ -15,12 +15,12 @@ import io.reactivex.Observable;
 import static com.example.admin.entrevistaironbit.presentation.utilidades.Tools.distanciaCoord;
 
 public class MainInteractor {
-    private final Servicio servicio;
+    private final ServicioWS servicioWS;
     private MainInteractorListener mainInteractorListener;
 
     @Inject
-    public MainInteractor(Servicio servicio) {
-        this.servicio = servicio;
+    public MainInteractor(ServicioWS servicioWS) {
+        this.servicioWS = servicioWS;
     }
 
     public void setMainInteractorListener(MainInteractorListener mainInteractorListener) {
@@ -28,7 +28,7 @@ public class MainInteractor {
     }
 
     public Observable<Lugar> consultaListaLugares(String latLong, String fecha) {
-        return servicio.consultaLugares(latLong, fecha);
+        return servicioWS.consultaLugares(latLong, fecha);
     }
 
     public void ordenaRegistros(List<Venue> venueList, String latLon) {

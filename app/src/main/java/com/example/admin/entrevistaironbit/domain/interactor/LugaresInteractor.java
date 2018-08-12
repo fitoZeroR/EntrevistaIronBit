@@ -1,7 +1,6 @@
 package com.example.admin.entrevistaironbit.domain.interactor;
 
-import com.example.admin.entrevistaironbit.data.db.dao.ICrud;
-import com.example.admin.entrevistaironbit.domain.modelo.modeloDB.Favorito;
+import com.example.admin.entrevistaironbit.data.local.cliente.ServicioDB;
 import com.example.admin.entrevistaironbit.domain.modelo.modeloWS.Venue;
 import com.google.gson.Gson;
 
@@ -9,15 +8,13 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import io.reactivex.Observable;
-
 public class LugaresInteractor {
-    private final ICrud iCrud;
+    private final ServicioDB servicioDB;
     private LugaresInteractorListener lugaresInteractorListener;
 
     @Inject
-    public LugaresInteractor(ICrud iCrud) {
-        this.iCrud = iCrud;
+    public LugaresInteractor(ServicioDB servicioDB) {
+        this.servicioDB = servicioDB;
     }
 
     public void setLugaresInteractorListener(LugaresInteractorListener lugaresInteractorListener) {
@@ -26,8 +23,7 @@ public class LugaresInteractor {
 
     @SuppressWarnings("unchecked")
     public void recuperaFavoritosGPS(List<Venue> venueList) {
-        Observable.fromIterable((List<Favorito>) iCrud.findAll())
-                .subscribe(favorito -> {
+        servicioDB.recuperaFavoritosTodos().subscribe(favorito -> {
                             Venue venue = new Gson().fromJson(favorito.getRegistroJson(), Venue.class);
                             for (int y = 0; y < venueList.size(); y++) {
                                 if (venueList.get(y).getId().equals(venue.getId())) {
@@ -55,12 +51,12 @@ public class LugaresInteractor {
 
     public void creaFavoritoDB(Venue venue) {
         venue.setFavorito(true);
-        iCrud.create(new Favorito(venue.getId(), new Gson().toJson(venue, Venue.class)));
+        servicioDB.insertaFavorito(venue);
     }
 
     public void eliminaFavoritoDB(Venue venue) {
         venue.setFavorito(false);
-        iCrud.delete(venue.getId());
+        servicioDB.borraFavorito(venue);
     }
 
     public interface LugaresInteractorListener {

@@ -1,4 +1,4 @@
-package com.example.admin.entrevistaironbit.data.db.dao;
+package com.example.admin.entrevistaironbit.data.local.db.dao;
 
 import java.util.List;
 

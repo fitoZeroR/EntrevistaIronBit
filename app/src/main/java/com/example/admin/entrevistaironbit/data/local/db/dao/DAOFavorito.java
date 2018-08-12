@@ -1,9 +1,9 @@
-package com.example.admin.entrevistaironbit.data.db.dao;
+package com.example.admin.entrevistaironbit.data.local.db.dao;
 
 import android.content.Context;
 
-import com.example.admin.entrevistaironbit.data.db.DatabaseHelper;
-import com.example.admin.entrevistaironbit.data.db.DatabaseManager;
+import com.example.admin.entrevistaironbit.data.local.db.DatabaseHelper;
+import com.example.admin.entrevistaironbit.data.local.db.DatabaseManager;
 import com.example.admin.entrevistaironbit.domain.modelo.modeloDB.Favorito;
 import com.j256.ormlite.stmt.DeleteBuilder;
 

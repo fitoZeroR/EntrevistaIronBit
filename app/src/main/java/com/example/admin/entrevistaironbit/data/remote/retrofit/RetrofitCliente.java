@@ -1,4 +1,4 @@
-package com.example.admin.entrevistaironbit.data.retrofit;
+package com.example.admin.entrevistaironbit.data.remote.retrofit;
 
 import com.example.admin.entrevistaironbit.domain.modelo.modeloWS.Lugar;
 import com.example.admin.entrevistaironbit.presentation.utilidades.Constantes;

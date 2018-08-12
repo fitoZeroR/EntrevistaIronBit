@@ -1,4 +1,4 @@
-package com.example.admin.entrevistaironbit.data.db;
+package com.example.admin.entrevistaironbit.data.local.db;
 
 import android.content.Context;
 
