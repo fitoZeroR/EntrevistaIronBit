@@ -1,5 +1,6 @@
 package com.example.admin.entrevistaironbit.domain.interactor;
 
+import com.example.admin.entrevistaironbit.data.DataDBListener;
 import com.example.admin.entrevistaironbit.data.local.cliente.ServicioDB;
 import com.example.admin.entrevistaironbit.domain.modelo.modeloWS.Venue;
 import com.google.gson.Gson;
@@ -10,15 +11,15 @@ import javax.inject.Inject;
 
 public class LugaresInteractor {
     private final ServicioDB servicioDB;
-    private LugaresInteractorListener lugaresInteractorListener;
+    private DataDBListener dataDBListener;
 
     @Inject
     public LugaresInteractor(ServicioDB servicioDB) {
         this.servicioDB = servicioDB;
     }
 
-    public void setLugaresInteractorListener(LugaresInteractorListener lugaresInteractorListener) {
-        this.lugaresInteractorListener = lugaresInteractorListener;
+    public void setLugaresInteractorListener(DataDBListener dataDBListener) {
+        this.dataDBListener = dataDBListener;
     }
 
     @SuppressWarnings("unchecked")
@@ -32,7 +33,7 @@ public class LugaresInteractor {
                             }
                         },
                         throwable -> {},
-                        () -> lugaresInteractorListener.retornaFavoritosGPS(venueList));
+                        () -> dataDBListener.retornaFavoritosGPS(venueList));
 
         /*Observable.just((List<Favorito>) iCrud.findAll())
                 .subscribe(favoritos -> {
@@ -57,9 +58,5 @@ public class LugaresInteractor {
     public void eliminaFavoritoDB(Venue venue) {
         venue.setFavorito(false);
         servicioDB.borraFavorito(venue);
-    }
-
-    public interface LugaresInteractorListener {
-        void retornaFavoritosGPS(List<Venue> venueList);
     }
 }

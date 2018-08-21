@@ -1,5 +1,6 @@
 package com.example.admin.entrevistaironbit.presentation.presenter;
 
+import com.example.admin.entrevistaironbit.data.DataDBListener;
 import com.example.admin.entrevistaironbit.domain.interactor.LugaresInteractor;
 import com.example.admin.entrevistaironbit.domain.modelo.modeloWS.Venue;
 
@@ -7,7 +8,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class LugaresPresenter extends Presenter<LugaresPresenter.View> implements LugaresInteractor.LugaresInteractorListener {
+public class LugaresPresenter extends Presenter<LugaresPresenter.View> implements DataDBListener {
     private final LugaresInteractor lugaresInteractor;
 
     @Inject
