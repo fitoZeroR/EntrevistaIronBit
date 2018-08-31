@@ -38,7 +38,7 @@ public class Tools {
             e.printStackTrace();
             return false;
         }
-        return netInfo != null && netInfo.isAvailable();
+        return netInfo != null && netInfo.isConnected();
     }
 
     public static double distanciaCoord(double lat1, double lng1, double lat2, double lng2) {

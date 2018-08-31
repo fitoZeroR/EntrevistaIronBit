@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 
 import com.example.admin.entrevistaironbit.R;
 import com.example.admin.entrevistaironbit.domain.modelo.modeloWS.Venue;
@@ -27,6 +28,7 @@ import butterknife.BindView;
 
 import static android.location.LocationManager.GPS_PROVIDER;
 import static com.example.admin.entrevistaironbit.presentation.utilidades.Tools.*;
+import static com.google.android.gms.location.LocationServices.getFusedLocationProviderClient;
 
 public class MainActivity extends ToolBarActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     @BindView(R.id.bottomNavigationView)
@@ -85,7 +87,6 @@ public class MainActivity extends ToolBarActivity implements GoogleApiClient.Con
         });
     }
 
-    @SuppressWarnings("deprecation")
     @SuppressLint("MissingPermission")
     private void requestForSpecificPermission() {
         RxPermissions rxPermissions = new RxPermissions(this);
@@ -97,8 +98,13 @@ public class MainActivity extends ToolBarActivity implements GoogleApiClient.Con
                     if (granted) {
                         // The permission has been granted//
                         if (isConnectionNetwork(this)) {
-                            mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-                            mainPresenter.disparaServicioLugares(mLastLocation.getLatitude()+","+mLastLocation.getLongitude(), parsearFechaCumpleanos());
+                            getFusedLocationProviderClient(this).getLastLocation().addOnSuccessListener(location -> {
+                                    // GPS location can be null if GPS is switched off
+                                    if (location != null) {
+                                        mLastLocation = location;
+                                        mainPresenter.disparaServicioLugares(mLastLocation.getLatitude()+","+mLastLocation.getLongitude(), parsearFechaCumpleanos());
+                                    }
+                                }).addOnFailureListener(e -> Log.i("RLM", e.getMessage()));
                         } else {
                             mensajeInformativo(this, getString(R.string.msg_no_conexion_internet), true);
                         }

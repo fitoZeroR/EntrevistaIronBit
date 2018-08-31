@@ -12,9 +12,6 @@ import com.example.admin.entrevistaironbit.presentation.di.modules.FragmentModul
 
 import java.util.Objects;
 
-/**
- * Base {@link android.app.Fragment} class for every fragment in this application.
- */
 public abstract class BaseFragment extends Fragment implements HasComponent<FragmentComponent> {
   private FragmentComponent fragmentComponent;
 
