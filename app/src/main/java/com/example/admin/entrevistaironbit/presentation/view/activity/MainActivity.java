@@ -10,7 +10,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 
 import com.example.admin.entrevistaironbit.R;
 import com.example.admin.entrevistaironbit.domain.modelo.modeloWS.Venue;
@@ -104,7 +103,7 @@ public class MainActivity extends ToolBarActivity implements GoogleApiClient.Con
                                         mLastLocation = location;
                                         mainPresenter.disparaServicioLugares(mLastLocation.getLatitude()+","+mLastLocation.getLongitude(), parsearFechaCumpleanos());
                                     }
-                                }).addOnFailureListener(e -> Log.i("RLM", e.getMessage()));
+                                });
                         } else {
                             mensajeInformativo(this, getString(R.string.msg_no_conexion_internet), true);
                         }
